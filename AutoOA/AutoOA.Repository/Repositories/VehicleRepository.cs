@@ -27,6 +27,7 @@ namespace AutoOA.Repository.Repositories
                 Include(x => x.Region).
                 Include(x => x.User).
                 Include(x => x.SalesData).
+                Include(x => x.VehicleColor).
                 FirstOrDefault(x => x.VehicleModel.VehicleModelName == vehicle.VehicleModel.VehicleModelName);
         }
 
@@ -40,6 +41,7 @@ namespace AutoOA.Repository.Repositories
                 Include(x => x.Region).
                 Include(x => x.User).
                 Include(x => x.SalesData).
+                Include(x => x.VehicleColor).
                 FirstOrDefault(x => x.VehicleId == id);
         }
 
@@ -52,6 +54,7 @@ namespace AutoOA.Repository.Repositories
                  Include(x => x.GearBox).
                  Include(x => x.Region).
                  Include(x => x.User).
+                 Include(x => x.VehicleColor).
                  Include(x => x.SalesData).ToList();
 
             return vehicleList;
@@ -66,6 +69,7 @@ namespace AutoOA.Repository.Repositories
                  Include(x => x.GearBox).
                  Include(x => x.Region).
                  Include(x => x.User).
+                 Include(x => x.VehicleColor).
                  Include(x => x.SalesData).FirstAsync(x => x.VehicleId == id);
 
             var vehicleDto = new VehicleReadDto
@@ -88,7 +92,7 @@ namespace AutoOA.Repository.Repositories
                 Mileage = v.Mileage,
                 VehicleIconPath = v.VehicleIconPath,
                 FuelTypeName = v.FuelType.FuelName,
-                Color = v.Color,
+                VehicleColor = v.VehicleColor.ColorName,
                 Description = v.Description,
                 SalesData = v.SalesData,
                 UserId = v.UserId,
@@ -97,7 +101,8 @@ namespace AutoOA.Repository.Repositories
         }
 
         public async Task UpdateAsync(VehicleReadDto vehicleDto, string regionName, string bodyTypeName,
-            string vehicleBrandName, string vehicleModelName, string gearBoxName, string driveTypeName, string fuelTypeName )
+            string vehicleBrandName, string vehicleModelName, string gearBoxName, string driveTypeName,
+            string fuelTypeName, string colorName )
         {
             var vehicle = _ctx.Vehicles.Include(x => x.VehicleModel).ThenInclude(x => x.VehicleBrand).
                  Include(x => x.BodyType).
@@ -106,6 +111,7 @@ namespace AutoOA.Repository.Repositories
                  Include(x => x.GearBox).
                  Include(x => x.Region).
                  Include(x => x.User).
+                 Include(x => x.VehicleColor).
                  Include(x => x.SalesData).FirstOrDefault(x => x.VehicleId == vehicleDto.Id);
 
             if (vehicle.Region.RegionName != regionName)
@@ -142,8 +148,8 @@ namespace AutoOA.Repository.Repositories
                 vehicle.VehicleIconPath = vehicleDto.VehicleIconPath;
             if (vehicle.FuelType.FuelName != fuelTypeName)
                 vehicle.FuelType = _ctx.FuelTypes.FirstOrDefault(x => x.FuelName == fuelTypeName);
-            if (vehicle.Color != vehicleDto.Color)
-                vehicle.Color = vehicleDto.Color;
+            if (vehicle.VehicleColor.ColorName != colorName)
+                vehicle.VehicleColor = _ctx.VehicleColors.FirstOrDefault(x => x.ColorName == colorName);
             if (vehicle.Description != vehicleDto.Description)
                 vehicle.Description = vehicleDto.Description;
 

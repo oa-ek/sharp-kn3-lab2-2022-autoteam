@@ -22,7 +22,7 @@ namespace AutoOA.Repository.Dto.VehicleDto
         public int Mileage { get; set; }
         public string? VehicleIconPath { get; set; }
         public string? FuelTypeName { get; set; }
-        public string? Color { get; set; }
+        public string? VehicleColor { get; set; }
         public string? Description { get; set; }
         
         public SalesData? SalesData { get; set; }

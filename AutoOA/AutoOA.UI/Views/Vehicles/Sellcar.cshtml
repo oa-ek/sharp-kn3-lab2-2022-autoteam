@@ -16,6 +16,7 @@
     var gear = ViewBag.GearBoxes as IEnumerable<GearBox>;
     var drive = ViewBag.DriveTypes as IEnumerable<DriveType>;
     var body = ViewBag.BodyTypes as IEnumerable<BodyType>;
+    var color = ViewBag.Colors as IEnumerable<VehicleColor>;
 }
 
 <div class="row">
@@ -75,9 +76,14 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="Color" class="control-label">Колір</label>
-            <input asp-for="Color" class="form-control" />
-            <span asp-validation-for="Color" class="text-danger"></span>
+            <label asp-for="VehicleColor" class="control-label">Колір</label>
+            <select asp-for="VehicleColor" name="colorName" id="colorName" class="form-select" required>
+                <option selected disabled>Choose...</option>
+                @foreach (var u in color)
+                {
+                    <option value="@u.ColorName">@u.ColorName</option>
+                }
+            </select>
         </div>
 
         <div class="form-group">

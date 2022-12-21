@@ -39,6 +39,7 @@ builder.Services.AddTransient<VehicleRepository>();
 builder.Services.AddTransient<VehicleModelRepository>();
 builder.Services.AddTransient<RegionRepository>();
 builder.Services.AddTransient<SalesDataRepository>();
+builder.Services.AddTransient<VehicleColorRepository>();
 
 var app = builder.Build();
 

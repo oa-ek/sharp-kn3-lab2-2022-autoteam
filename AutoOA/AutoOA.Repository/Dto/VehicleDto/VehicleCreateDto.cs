@@ -61,8 +61,7 @@ namespace AutoOA.Repository.Dto.VehicleDto
         public string? FuelTypeName { get; set; }
 
         [Required]
-        [RegularExpression("^[A-Za-z]+$", ErrorMessage = "Must be a valid color")]
-        public string? Color { get; set; }
+        public string? VehicleColor { get; set; }
 
         [Required]
         public string? Description { get; set; }

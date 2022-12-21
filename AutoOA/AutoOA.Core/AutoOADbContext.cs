@@ -24,5 +24,6 @@ namespace AutoOA.Core
         public DbSet<VehicleBrand> VehicleBrands { get; set; }
         public DbSet<VehicleModel> VehicleModels { get; set; }
         public DbSet<DriveType> DriveTypes { get; set; }
+        public DbSet<VehicleColor> VehicleColors { get; set; }
     }
 }

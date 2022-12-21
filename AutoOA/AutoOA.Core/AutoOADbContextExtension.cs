@@ -321,6 +321,62 @@ namespace AutoOA.Core
                     RegionId = 1,
                     RegionName = "Ukraine"
                 });
+            builder.Entity<VehicleColor>().HasData(
+                new VehicleColor
+                {
+                    Id = 1,
+                    ColorName = "Бежевий"
+                },
+                new VehicleColor
+                {
+                    Id = 2,
+                    ColorName = "Чорний"
+                },
+                new VehicleColor
+                {
+                    Id = 3,
+                    ColorName = "Синій"
+                },
+                new VehicleColor
+                {
+                    Id = 4,
+                    ColorName = "Коричневий"
+                },
+                new VehicleColor
+                {
+                    Id = 5,
+                    ColorName = "Зелений"
+                },
+                new VehicleColor
+                {
+                    Id = 6,
+                    ColorName = "Сірий"
+                },
+                new VehicleColor
+                {
+                    Id = 7,
+                    ColorName = "Помаранчевий"
+                },
+                new VehicleColor
+                {
+                    Id = 8,
+                    ColorName = "Фіолетовий"
+                },
+                new VehicleColor
+                {
+                    Id = 9,
+                    ColorName = "Червоний"
+                },
+                new VehicleColor
+                {
+                    Id = 10,
+                    ColorName = "Білий"
+                },
+                new VehicleColor
+                {
+                    Id = 11,
+                    ColorName = "Жовтий"
+                });
            builder.Entity<Vehicle>().HasData(
                 new Vehicle
                 {
@@ -341,7 +397,7 @@ namespace AutoOA.Core
                     VehicleIconPath = @"\Images\w220cidan.png",
                     FuelTypeId = 1,
                     UserId = USER_ID,
-                    Color = "Black",
+                    VehicleColorId = 2,
                     Description = "Авто в дуже хорошому стані. Повністтю обслужене. Капіталовкладень не потребує."
                 },
                 new Vehicle
@@ -363,7 +419,7 @@ namespace AutoOA.Core
                     VehicleIconPath = @"\Images\320Universal.png",
                     FuelTypeId = 2,
                     UserId = USER_ID,
-                    Color = "Gray",
+                    VehicleColorId = 3,
                     Description = "Продаю свій автомобіль у хорошому стані. Зроблено всі планові роботи, все працює добре. Є невеликі подряпини, пов'язані з експлуатацією."
                 });
         }

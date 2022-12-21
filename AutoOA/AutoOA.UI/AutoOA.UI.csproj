@@ -25,4 +25,8 @@
     <ProjectReference Include="..\AutoOA.Repository\AutoOA.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logic\" />
+  </ItemGroup>
+
 </Project>

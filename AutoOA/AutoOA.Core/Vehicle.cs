@@ -29,8 +29,14 @@ namespace AutoOA.Core
         public string? StateNumber { get; set; } = "Не задано"; // Гос номер
         public int NumberOfSeats { get; set; } // Кількість сидінь
         public int NumberOfDoors { get; set; } // Кількість дверей
+
+        [DataType(DataType.Currency)]
         public decimal Price_USD { get; set; } = 0; // Ціна в доларах
+
+        [DataType(DataType.Currency)]
         public decimal Price_UAH { get; set; } = 0; // Ціна в гривнях
+
+        [DataType(DataType.Currency)]
         public decimal Price_EUR { get; set; } = 0; // Ціна в євро
         public bool isNew { get; set; } // Новий?
         public string MileageIconPath { get; set; } = @"\Images\MileageIcon.png";
@@ -41,7 +47,9 @@ namespace AutoOA.Core
         public int FuelTypeId { get; set; }
         public FuelType? FuelType { get; set; } // Тип палива
         
-        public string? Color { get; set; } // Колір
+        public int VehicleColorId { get; set; }
+        public VehicleColor? VehicleColor { get; set; } // Колір
+
         public string? Description { get; set; } // Опис
 
         public SalesData? SalesData { get; set; } // День продажу

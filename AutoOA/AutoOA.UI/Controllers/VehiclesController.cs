@@ -5,8 +5,6 @@ using AutoOA.Repository.Repositories;
 using AutoOA.Repository.Dto.VehicleDto;
 using AutoOA.Core;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.IO;
 
 namespace AutoOA.UI.Controllers
 {
@@ -24,6 +22,7 @@ namespace AutoOA.UI.Controllers
         private readonly BodyTypeRepository _bodyTypeRepository;
         private readonly SalesDataRepository _salesDataRepository;
         private readonly UsersRepository _usersRepository;
+        private readonly VehicleColorRepository _vehicleColorRepository;
 
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
@@ -36,7 +35,8 @@ namespace AutoOA.UI.Controllers
             GearBoxRepository gearBoxRepository, SignInManager<User> signInManager,
             DriveTypeRepository driveTypeRepository, BodyTypeRepository bodyTypeRepository,
             SalesDataRepository salesDataRepository, UsersRepository usersRepository,
-            UserManager<User> userManager, IWebHostEnvironment webHostEnvironment)
+            UserManager<User> userManager, IWebHostEnvironment webHostEnvironment,
+            VehicleColorRepository vehicleColorRepository)
         {
             _logger = logger;
             _vehicleRepository = vehicleRepository;
@@ -52,7 +52,7 @@ namespace AutoOA.UI.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _webHostEnvironment = webHostEnvironment;
-
+            _vehicleColorRepository = vehicleColorRepository;
         }
 
         public IActionResult Index()
@@ -77,13 +77,14 @@ namespace AutoOA.UI.Controllers
             ViewBag.GearBoxes = _gearBoxRepository.GetGearBoxes();
             ViewBag.DriveTypes = _driveTypeRepository.GetDriveTypes();
             ViewBag.BodyTypes = _bodyTypeRepository.GetBodyTypes();
+            ViewBag.Colors = _vehicleColorRepository.GetColors();
             return View();
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Sellcar(VehicleCreateDto vehicleDto, IFormFile picture, string regionName, string bodyTypeName,
-            string vehicleBrandName, string vehicleModelName, string gearBoxName, string driveTypeName, string fuelTypeName)
+            string vehicleBrandName, string vehicleModelName, string gearBoxName, string driveTypeName, string fuelTypeName, string colorName)
         {
             ViewBag.Regions = _regionRepository.GetRegions();
             ViewBag.Models = _vehicleModelRepository.GetVehicleModels();
@@ -92,6 +93,7 @@ namespace AutoOA.UI.Controllers
             ViewBag.GearBoxes = _gearBoxRepository.GetGearBoxes();
             ViewBag.DriveTypes = _driveTypeRepository.GetDriveTypes();
             ViewBag.BodyTypes = _bodyTypeRepository.GetBodyTypes();
+            ViewBag.Colors = _vehicleColorRepository.GetColors();
             if (ModelState.IsValid)
             {
                 string picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", picture.FileName);
@@ -159,6 +161,12 @@ namespace AutoOA.UI.Controllers
                     user = new User() { Email = User.Identity.Name };
                 }
 
+                var color = _vehicleColorRepository.GetColorByName(colorName);
+                if(color == null)
+                {
+                    color = new VehicleColor() { ColorName = colorName };
+                }
+
                 var vehicle = await _vehicleRepository.AddVehicleAsync(new Vehicle
                 {
                     Region = region,
@@ -177,7 +185,7 @@ namespace AutoOA.UI.Controllers
                     Mileage = vehicleDto.Mileage,
                     VehicleIconPath = vehicleDto.VehicleIconPath,
                     FuelType = fuelType,
-                    Color = vehicleDto.Color,
+                    VehicleColor = color,
                     Description = vehicleDto.Description,
                     SalesData = saleData,
                     User = user
@@ -199,17 +207,18 @@ namespace AutoOA.UI.Controllers
             ViewBag.GearBoxes = _gearBoxRepository.GetGearBoxes();
             ViewBag.DriveTypes = _driveTypeRepository.GetDriveTypes();
             ViewBag.BodyTypes = _bodyTypeRepository.GetBodyTypes();
+            ViewBag.Colors = _vehicleColorRepository.GetColors();
             return View(await _vehicleRepository.GetVehicleDto(id));
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Edit(VehicleReadDto vehicleDto, string regionName, string bodyTypeName,
-            string vehicleBrandName, string vehicleModelName, string gearBoxName, string driveTypeName, string fuelTypeName)
+            string vehicleBrandName, string vehicleModelName, string gearBoxName, string driveTypeName, string fuelTypeName, string color)
         {
             if (ModelState.IsValid)
             {
-                await _vehicleRepository.UpdateAsync(vehicleDto, regionName, bodyTypeName, vehicleBrandName, vehicleModelName, gearBoxName, driveTypeName, fuelTypeName);
+                await _vehicleRepository.UpdateAsync(vehicleDto, regionName, bodyTypeName, vehicleBrandName, vehicleModelName, gearBoxName, driveTypeName, fuelTypeName, color);
                 return RedirectToAction("Details", "Vehicles", new { id = vehicleDto.Id });
             }
             ViewBag.Regions = _regionRepository.GetRegions();
@@ -219,6 +228,7 @@ namespace AutoOA.UI.Controllers
             ViewBag.GearBoxes = _gearBoxRepository.GetGearBoxes();
             ViewBag.DriveTypes = _driveTypeRepository.GetDriveTypes();
             ViewBag.BodyTypes = _bodyTypeRepository.GetBodyTypes();
+            ViewBag.Colors = _vehicleColorRepository.GetColors();
             return View(vehicleDto);
         }
 
