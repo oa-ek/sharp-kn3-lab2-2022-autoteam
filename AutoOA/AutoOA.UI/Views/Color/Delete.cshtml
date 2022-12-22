@@ -1,0 +1,28 @@
+﻿@using AutoOA.Core
+@using AutoOA.Repository.Dto.ColorDto
+@using AutoOA.Repository.Dto.VehicleModelDto
+@using AutoOA.Repository.Dto.VehicleDto
+
+@model VehicleColorReadDto
+
+@{
+    Layout = "~/Views/Shared/_NiceLayout.cshtml";
+}
+
+<h1>Confirm delete</h1>
+<hr />
+
+<h1>Видалити користувача?</h1>
+<hr />
+
+<p>@Model.ColorName</p>
+
+<hr />
+<form asp-action="ConfirmDelete" class="col-md-4">
+    @Html.AntiForgeryToken()
+    <input asp-for="Id" type="hidden" />
+    <button type="submit" class="btn btn-danger">Видалити колір!!!</button>
+    <a href="/color/index" class="btn btn-outline-dark">Повернутися до списку / Відмінити</a>
+</form>
+
+<hr />

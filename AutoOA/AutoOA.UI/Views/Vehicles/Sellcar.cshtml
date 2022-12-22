@@ -64,17 +64,23 @@
             <span asp-validation-for="ProductionYear" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
-            <label asp-for="BodyTypeName" class="control-label">Тип кузова</label>
-            <select asp-for="BodyTypeName" name="bodyTypeName" id="bodyTypeName" class="form-select" required>
-                <option selected disabled>Choose...</option>
-                @foreach (var u in body)
-                {
-                    <option value="@u.BodyTypeName">@u.BodyTypeName</option>
-                }
-            </select>
+        <div class="row mb-3">
+            <div class="form-group">
+                <label asp-for="BodyTypeName" class="control-label">Тип кузова</label>
+                <select asp-for="BodyTypeName" name="bodyTypeName" id="bodyTypeName" class="form-select" required>
+                    <option selected disabled>Choose...</option>
+                    @foreach (var u in body)
+                    {
+                        <option value="@u.BodyTypeName">@u.BodyTypeName</option>
+                    }
+                </select>
+            </div>
+            <div class="m-1">
+                <a href="/BodyType/Create" class="btn btn-outline-primary">Додати тип кузова</a>
+            </div>
         </div>
 
+        <div class="row mb-3">
         <div class="form-group">
             <label asp-for="VehicleColor" class="control-label">Колір</label>
             <select asp-for="VehicleColor" name="colorName" id="colorName" class="form-select" required>
@@ -84,7 +90,10 @@
                     <option value="@u.ColorName">@u.ColorName</option>
                 }
             </select>
-            <span asp-validation-for="VehicleColor" class="text-dager"></span>
+            <div class="m-1">
+                <a href="/Color/Create" class="btn btn-outline-primary">Додати колір</a>
+            </div>
+        </div>
         </div>
 
         <div class="form-group">
@@ -129,9 +138,9 @@
             <span asp-validation-for="Mileage" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
+        <div class="form-check">
             <label asp-for="isNew" class="control-label">Новий?</label>
-            <input asp-for="isNew" class="form-control" />
+            <input asp-for="isNew" type="checkbox" class="form-check-input" />
             <span asp-validation-for="isNew" class="text-danger"></span>
         </div>
 
@@ -159,7 +168,7 @@
 
         <div class="form-group">
             <label asp-for="VehicleIconPath" class="control-label">Додайте фото</label>
-            <input class="form-control" name="picture"  id="picture" type="file" />
+            <input class="form-control" name="picture" id="picture" type="file" />
             <span asp-validation-for="VehicleIconPath" class="text-danger"></span>
         </div>
 
@@ -174,10 +183,6 @@
             <button value="Create" va class="btn btn-primary" type="submit">Подати оголошення</button>
         </div>
     </form>
-</div>
-
-<div class="float-end">
-    <a href="/Vehicles/Add-BodyType" class="btn btn-outline-primary">Додати тип кузова</a>
 </div>
 
 @section Scripts {

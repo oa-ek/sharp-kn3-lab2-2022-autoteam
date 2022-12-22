@@ -4,9 +4,6 @@ using System.Diagnostics;
 using AutoOA.Repository.Repositories;
 using AutoOA.Core;
 using Microsoft.EntityFrameworkCore;
-using AutoOA.Repository.Dto.VehicleDto;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Hosting;
 
 namespace AutoOA.UI.Controllers
 {
@@ -58,11 +55,13 @@ namespace AutoOA.UI.Controllers
 
         public IActionResult IndexUAH()
         {
+            GetViewBags();
             return View(_vehicleRepository.GetVehicles());
         }
 
         public IActionResult IndexEUR()
         {
+            GetViewBags();
             return View(_vehicleRepository.GetVehicles());
         }
 

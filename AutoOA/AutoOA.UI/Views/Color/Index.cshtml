@@ -1,0 +1,35 @@
+﻿@using AutoOA.Core
+@using AutoOA.Repository.Dto.ColorDto
+
+@model IEnumerable<VehicleColor>
+
+@{
+    Layout = "~/Views/Shared/_NiceLayout.cshtml";
+}
+
+<div class="float-end">
+    <a href="/color/create" class="btn btn-outline-primary">Додати колір</a>
+</div>
+
+<h1>Список кольорів</h1>
+<hr />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Color Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.ColorName</td>
+                <td>
+                    <a href="/color/edit/@u.Id" class="btn btn-warning">Редагувати</a>
+                    <a href="/color/delete/@u.Id" class="btn btn-danger">Видалити</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

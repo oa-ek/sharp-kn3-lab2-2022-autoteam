@@ -30,7 +30,7 @@ namespace AutoOA.UI.Controllers
                 {
                     BodyTypeName = bodyTypeDto.BodyName
                 });
-                return RedirectToAction("Index", "BodyType", new { id = bodyType.BodyTypeId });
+                return RedirectToAction("Sellcar", "Vehicles");
             }
             return View(bodyTypeDto);
         }

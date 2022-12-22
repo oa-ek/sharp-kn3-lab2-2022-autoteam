@@ -48,7 +48,8 @@
                                 <div class="form-group ">
                                     <select name="brandId" class="form-control">
                                         <option selected>Марка</option>
-                                        @foreach(var u in brands){
+                                        @foreach (var u in brands)
+                                        {
                                             <option value="@u.VehicleBrandId">@u.VehicleBrandName</option>
                                         }
                                     </select>
@@ -58,7 +59,7 @@
                                 <div class="form-group ">
                                     <select name="modelId" class="form-control">
                                         <option selected>Модель</option>
-                                        @foreach(var u in model)
+                                        @foreach (var u in model)
                                         {
                                             <option value="@u.VehicleModelId">@u.VehicleModelName</option>
                                         }
@@ -69,7 +70,8 @@
                                 <div class="form-group ">
                                     <select name="bodyTypeId" class="form-control">
                                         <option selected>Тип кузова</option>
-                                        @foreach(var u in body){
+                                        @foreach (var u in body)
+                                        {
                                             <option value="@u.BodyTypeId">@u.BodyTypeName</option>
                                         }
                                     </select>
@@ -79,7 +81,8 @@
                                 <div class="form-group ">
                                     <select name="colorId" class="form-control">
                                         <option selected>Колір</option>
-                                        @foreach(var u in color){
+                                        @foreach (var u in color)
+                                        {
                                             <option value="@u.Id">@u.ColorName</option>
                                         }
                                     </select>
@@ -100,34 +103,36 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
         @foreach (var u in Model)
         {
-            <div class="row gy-1">
-                <div class="card" style="width:400px">
-                    <a href="/Vehicles/Details/@u.VehicleId" class="text-decoration-none">
-                        <img class="card-img-top" style="height: 250px" src="@u.VehicleIconPath" alt=" ">
-                        <div class="card-body">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">
-                                    <a href="/Vehicles/Details/@u.VehicleId" class="text-decoration-none">@u.VehicleModel.VehicleBrand.VehicleBrandName @u.VehicleModel.VehicleModelName @u.ProductionYear</a>
-                                </h5>
-                                <p class="text-success">@u.Price_USD $</p>
-                                <table class="table table-borderless">
-                                    <tbody>
-                                        <tr>
-                                            <td><img class="card-img" src="@u.FuelType.IconPath" alt="..." style="width: 1.3rem"> @u.FuelType.FuelName</td>
-                                            <td><img class="card-img" src="@u.GearBox.IconPath" alt="..." style="width: 1.3rem"> @u.GearBox.GearBoxName</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img class="card-img" src="@u.BodyType.IconPath" alt="..." style="width: 1.3rem"> @u.BodyType.BodyTypeName</td>
-                                            <td><img class="card-img" src="@u.MileageIconPath" alt="..." style="width: 1.3rem"> @u.Mileage км</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+            <div class="row">
+                <div class="col-4">
+                    <div class="card" style="width:400px">
+                        <a href="/Vehicles/Details/@u.VehicleId" class="text-decoration-none">
+                            <img class="card-img-top" style="height: 250px" src="@u.VehicleIconPath" alt=" ">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">
+                                        <a href="/Vehicles/Details/@u.VehicleId" class="text-decoration-none">@u.VehicleModel.VehicleBrand.VehicleBrandName @u.VehicleModel.VehicleModelName @u.ProductionYear</a>
+                                    </h5>
+                                    <p class="text-success">@u.Price_USD $</p>
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr>
+                                                <td><img class="card-img" src="@u.FuelType.IconPath" alt="..." style="width: 1.3rem"> @u.FuelType.FuelName</td>
+                                                <td><img class="card-img" src="@u.GearBox.IconPath" alt="..." style="width: 1.3rem"> @u.GearBox.GearBoxName</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img class="card-img" src="@u.BodyType.IconPath" alt="..." style="width: 1.3rem"> @u.BodyType.BodyTypeName</td>
+                                                <td><img class="card-img" src="@u.MileageIconPath" alt="..." style="width: 1.3rem"> @u.Mileage км</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
             </div>
-        }       
+        }
     </div>
 </div>
 

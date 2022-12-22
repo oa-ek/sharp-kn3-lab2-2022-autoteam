@@ -2,25 +2,31 @@
 <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-        
+
         @if (User.IsInRole("Admin"))
         {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/Users">
-                <i class="bi bi-person"></i>
-                <span>Список користувачів</span>
-            </a>
-        </li><!-- End F.A.Q Page Nav -->
+                    <i class="bi bi-person"></i>
+                    <span>Список користувачів</span>
+                </a>
+            </li>
         }
         @if (User.IsInRole("Moderator"))
         {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/Vehicles/Index">
-                <i class="bi bi-card-heading"></i>
-                <span>Редагування оголошень</span>
-            </a>
-        </li><!-- End Contact Page Nav -->        
+                    <i class="bi bi-card-heading"></i>
+                    <span>Редагування оголошень</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/Color/Index">
+                    <i class="bi bi-card-heading"></i>
+                    <span>Редагування кольори</span>
+                </a>
+            </li>
         }
     </ul>
 
-</aside><!-- End Sidebar-->
+</aside>

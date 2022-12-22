@@ -10,13 +10,100 @@
 @model IEnumerable<Vehicle>
 
 @{
+    ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_NiceLayout.cshtml";
 }
+
+@{
+
+    var region = ViewBag.Regions as IEnumerable<Region>;
+    var brands = ViewBag.Brands as IEnumerable<VehicleBrand>;
+    var model = ViewBag.Models as IEnumerable<VehicleModel>;
+    var fuel = ViewBag.FuelTypes as IEnumerable<FuelType>;
+    var gear = ViewBag.GearBoxes as IEnumerable<GearBox>;
+    var drive = ViewBag.DriveTypes as IEnumerable<DriveType>;
+    var body = ViewBag.BodyTypes as IEnumerable<BodyType>;
+    var color = ViewBag.Colors as IEnumerable<VehicleColor>;
+}
+
+<form action="/Home/Filter" class="search-banner text-white pm-5" enctype="multipart/form-data" method="post" id="search-banner">
+    <div class="container">
+        <div class="row pb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group ">
+                                    <select name="regionId" class="form-select" required>
+                                        <option selected disabled>Регіон</option>
+                                        @foreach (var u in region)
+                                        {
+                                            <option value="@u.RegionId">@u.RegionName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group ">
+                                    <select name="brandId" class="form-control">
+                                        <option selected>Марка</option>
+                                        @foreach (var u in brands)
+                                        {
+                                            <option value="@u.VehicleBrandId">@u.VehicleBrandName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group ">
+                                    <select name="modelId" class="form-control">
+                                        <option selected>Модель</option>
+                                        @foreach (var u in model)
+                                        {
+                                            <option value="@u.VehicleModelId">@u.VehicleModelName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group ">
+                                    <select name="bodyTypeId" class="form-control">
+                                        <option selected>Тип кузова</option>
+                                        @foreach (var u in body)
+                                        {
+                                            <option value="@u.BodyTypeId">@u.BodyTypeName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group ">
+                                    <select name="colorId" class="form-control">
+                                        <option selected>Колір</option>
+                                        @foreach (var u in color)
+                                        {
+                                            <option value="@u.Id">@u.ColorName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-dark">Search Car</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <div class="text-center">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
         @foreach (var u in Model)
         {
-            <div style="margin-right: 5px">
+            <div class="row gy-1">
                 <div class="card" style="width:400px">
                     <a href="/Vehicles/Details/@u.VehicleId" class="text-decoration-none">
                         <img class="card-img-top" style="height: 250px" src="@u.VehicleIconPath" alt=" ">
@@ -25,7 +112,7 @@
                                 <h5 class="fw-bolder">
                                     <a href="/Vehicles/Details/@u.VehicleId" class="text-decoration-none">@u.VehicleModel.VehicleBrand.VehicleBrandName @u.VehicleModel.VehicleModelName @u.ProductionYear</a>
                                 </h5>
-                                <p class="text-success">@u.Price_EUR €</p>
+                                <p class="text-success">@u.Price_EUR $</p>
                                 <table class="table table-borderless">
                                     <tbody>
                                         <tr>
