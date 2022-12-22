@@ -66,40 +66,50 @@ namespace AutoOA.UI.Controllers
             return View(_vehicleRepository.GetVehicles());
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Index(VehicleReadDto model)
+        [HttpPost]
+        public async Task<IActionResult> Filter(int? regionId, int? brandId, int? modelId, int? bodyTypeId, int? colorId)
         {
-            ViewBag.Regions = _regionRepository.GetRegions();
-            ViewBag.Models = _vehicleModelRepository.GetVehicleModels();
-            ViewBag.Brands = _vehicleBrandRepository.GetVehicleBrands();
-            ViewBag.FuelTypes = _fuelTypeRepository.GetFuelTypes();
-            ViewBag.GearBoxes = _gearBoxRepository.GetGearBoxes();
-            ViewBag.DriveTypes = _driveTypeRepository.GetDriveTypes();
-            ViewBag.BodyTypes = _bodyTypeRepository.GetBodyTypes();
-            ViewBag.Colors = _vehicleColorRepository.GetColors();
+            GetViewBags();
 
-            ViewData["GetVehicleDetails"] = model;
+            var result = _vehicleRepository.GetVehicles();
 
-            var result = from x in _ctx.Vehicles select x; 
+            if (regionId != null)
+            {
+                result = result.Where(x => x.RegionId == regionId).ToList();
+            }
 
-            if (!string.IsNullOrEmpty(model.BodyTypeName))
-                result = result.Where(x => x.BodyType.BodyTypeName.Contains(model.BodyTypeName));
 
-            return View(await result.Include(x => x.VehicleModel).ThenInclude(x => x.VehicleBrand).
-                Include(x => x.BodyType).
-                Include(x => x.DriveType).
-                Include(x => x.FuelType).
-                Include(x => x.GearBox).
-                Include(x => x.Region).
-                Include(x => x.User).
-                Include(x => x.VehicleColor).
-                Include(x => x.SalesData).ToListAsync());
+            if ( modelId != null)
+            {
+                result = result.Where(x => x.VehicleModel.VehicleModelId == modelId).ToList();
+            }
+
+
+            if (brandId != null)
+            {
+                result = result.Where(x => x.VehicleModel.VehicleBrandId == brandId).ToList();
+            }
+
+
+            if (colorId != null)
+            {
+                result = result.Where(x => x.VehicleColorId == colorId).ToList();
+            }
+
+
+            if (bodyTypeId != null)
+            {
+                result = result.Where(x => x.BodyTypeId == bodyTypeId).ToList();
+            }
+
+            return View("Index", result);
         }
 
-        [Route("Home/Index")]
         [HttpGet]
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string? searchString)
         {
+            GetViewBags();
+
             ViewData["GetVehicleDetails"] = searchString;
 
             var brands = from b in _ctx.Vehicles
@@ -124,6 +134,18 @@ namespace AutoOA.UI.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private void GetViewBags()
+        {
+            ViewBag.Regions = _regionRepository.GetRegions();
+            ViewBag.Models = _vehicleModelRepository.GetVehicleModels();
+            ViewBag.Brands = _vehicleBrandRepository.GetVehicleBrands();
+            ViewBag.FuelTypes = _fuelTypeRepository.GetFuelTypes();
+            ViewBag.GearBoxes = _gearBoxRepository.GetGearBoxes();
+            ViewBag.DriveTypes = _driveTypeRepository.GetDriveTypes();
+            ViewBag.BodyTypes = _bodyTypeRepository.GetBodyTypes();
+            ViewBag.Colors = _vehicleColorRepository.GetColors();
         }
     }
 }

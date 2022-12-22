@@ -60,7 +60,7 @@ namespace AutoOA.Repository.Dto.VehicleDto
         [Required]
         public string? FuelTypeName { get; set; }
 
-        [Required]
+
         public string? VehicleColor { get; set; }
 
         [Required]

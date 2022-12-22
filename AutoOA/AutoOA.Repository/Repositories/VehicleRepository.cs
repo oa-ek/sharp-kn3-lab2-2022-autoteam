@@ -1,8 +1,6 @@
 ﻿using AutoOA.Core;
 using AutoOA.Repository.Dto.VehicleDto;
 using Microsoft.EntityFrameworkCore;
-using AutoOA.Repository.Repositories;
-using Microsoft.AspNetCore.Hosting.Server;
 
 namespace AutoOA.Repository.Repositories
 {

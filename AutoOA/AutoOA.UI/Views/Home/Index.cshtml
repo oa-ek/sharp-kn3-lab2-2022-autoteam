@@ -26,7 +26,7 @@
     var color = ViewBag.Colors as IEnumerable<VehicleColor>;
 }
 
-<form class="search-banner text-white pm-5" enctype="multipart/form-data" method="get" id="search-banner">
+<form action="/Home/Filter" class="search-banner text-white pm-5" enctype="multipart/form-data" method="post" id="search-banner">
     <div class="container">
         <div class="row pb-4">
             <div class="col-md-12">
@@ -35,71 +35,58 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group ">
-                                    <label asp-for="" class="control-label">Регіон</label>
-                                    <select asp-for="RegionName" name="" id="" class="form-select" required>
-                                        <option selected disabled>Choose...</option>
+                                    <select name="regionId" class="form-select" required>
+                                        <option selected disabled>Регіон</option>
                                         @foreach (var u in region)
                                         {
-                                            <option value="@u.RegionName">@u.RegionName</option>
+                                            <option value="@u.RegionId">@u.RegionName</option>
                                         }
                                     </select>
-                                    <span asp-validation-for="RegionName" class="text-danger"></span>
-
-                                    <select id="inputState" class="form-control">
-                                        <option selected>... Select New/Used...</option>
-                                        <option>New</option>
-                                        <option>Used</option>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group ">
+                                    <select name="brandId" class="form-control">
+                                        <option selected>Марка</option>
+                                        @foreach(var u in brands){
+                                            <option value="@u.VehicleBrandId">@u.VehicleBrandName</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group ">
-                                    <select id="inputState" class="form-control">
-                                        <option selected>... Select Make...</option>
-                                        <option>BMW</option>
-                                        <option>Audi</option>
-                                        <option>Maruti</option>
-                                        <option>Tesla</option>
+                                    <select name="modelId" class="form-control">
+                                        <option selected>Модель</option>
+                                        @foreach(var u in model)
+                                        {
+                                            <option value="@u.VehicleModelId">@u.VehicleModelName</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group ">
-                                    <select id="inputState" class="form-control">
-                                        <option selected>... Select Model...</option>
-                                        <option>City</option>
-                                        <option>Jazz</option>
-                                        <option>Brio</option>
-
+                                    <select name="bodyTypeId" class="form-control">
+                                        <option selected>Тип кузова</option>
+                                        @foreach(var u in body){
+                                            <option value="@u.BodyTypeId">@u.BodyTypeName</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group ">
-                                    <select id="inputState" class="form-control">
-                                        <option selected>... Select Location...</option>
-                                        <option>New Delhi</option>
-                                        <option>Banglore</option>
-                                        <option>Chennai</option>
-                                        <option>Jaipur</option>
+                                    <select name="colorId" class="form-control">
+                                        <option selected>Колір</option>
+                                        @foreach(var u in color){
+                                            <option value="@u.Id">@u.ColorName</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <div class="form-group ">
-                                    <select id="inputState" class="form-control">
-                                        <option selected>... Select Budget...</option>
-                                        <option>1 Lac-5 Lac</option>
-                                        <option>5 Lac-10 Lac</option>
-                                        <option>10 Lac-15 Lac</option>
-                                        <option>15 Lac-20 Lac</option>
-                                        <option>20 Lac-25 Lac</option>
-                                        <option>25 Lac & Above</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-dark">Search Car</button>
+                                <button type="submit" class="btn btn-dark">Search Car</button>
                             </div>
                         </div>
                     </div>

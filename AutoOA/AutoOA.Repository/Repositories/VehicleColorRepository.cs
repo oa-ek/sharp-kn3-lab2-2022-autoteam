@@ -1,9 +1,4 @@
 ﻿using AutoOA.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoOA.Repository.Repositories
 {
@@ -37,11 +32,6 @@ namespace AutoOA.Repository.Repositories
         public VehicleColor GetColorByName(string name)
         {
             return _ctx.VehicleColors.FirstOrDefault(x => x.ColorName == name);
-        }
-
-        public VehicleColor GetColorByMetallic(bool isMetallic)
-        {
-            return _ctx.VehicleColors.FirstOrDefault(x => x.isMetallic == isMetallic);
         }
 
         public async Task DeleteColorAsync(int id)

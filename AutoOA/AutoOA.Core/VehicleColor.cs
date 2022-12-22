@@ -9,7 +9,6 @@ namespace AutoOA.Core
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? ColorName { get; set; }
-        public bool isMetallic { get; set; } = false;
 
         public virtual ICollection<Vehicle>? Vehicles { get; set; }
     }

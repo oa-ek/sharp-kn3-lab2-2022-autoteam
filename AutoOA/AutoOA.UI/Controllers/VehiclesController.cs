@@ -86,14 +86,7 @@ namespace AutoOA.UI.Controllers
         public async Task<IActionResult> Sellcar(VehicleCreateDto vehicleDto, IFormFile picture, string regionName, string bodyTypeName,
             string vehicleBrandName, string vehicleModelName, string gearBoxName, string driveTypeName, string fuelTypeName, string colorName)
         {
-            ViewBag.Regions = _regionRepository.GetRegions();
-            ViewBag.Models = _vehicleModelRepository.GetVehicleModels();
-            ViewBag.Brands = _vehicleBrandRepository.GetVehicleBrands();
-            ViewBag.FuelTypes = _fuelTypeRepository.GetFuelTypes();
-            ViewBag.GearBoxes = _gearBoxRepository.GetGearBoxes();
-            ViewBag.DriveTypes = _driveTypeRepository.GetDriveTypes();
-            ViewBag.BodyTypes = _bodyTypeRepository.GetBodyTypes();
-            ViewBag.Colors = _vehicleColorRepository.GetColors();
+            
             if (ModelState.IsValid)
             {
                 string picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", picture.FileName);
@@ -165,6 +158,7 @@ namespace AutoOA.UI.Controllers
                 if(color == null)
                 {
                     color = new VehicleColor() { ColorName = colorName };
+                    color = await _vehicleColorRepository.AddColorAsync(color);
                 }
 
                 var vehicle = await _vehicleRepository.AddVehicleAsync(new Vehicle
@@ -193,6 +187,17 @@ namespace AutoOA.UI.Controllers
 
                 //vehicle.VehicleIconPath = Path.Combine("img", "upload", picturePath);
                 return RedirectToAction("Index", "Home", new { id = vehicle.VehicleId });
+            }
+            else
+            {
+                ViewBag.Regions = _regionRepository.GetRegions();
+                ViewBag.Models = _vehicleModelRepository.GetVehicleModels();
+                ViewBag.Brands = _vehicleBrandRepository.GetVehicleBrands();
+                ViewBag.FuelTypes = _fuelTypeRepository.GetFuelTypes();
+                ViewBag.GearBoxes = _gearBoxRepository.GetGearBoxes();
+                ViewBag.DriveTypes = _driveTypeRepository.GetDriveTypes();
+                ViewBag.BodyTypes = _bodyTypeRepository.GetBodyTypes();
+                ViewBag.Colors = _vehicleColorRepository.GetColors();
             }
             return View(vehicleDto);
         }
