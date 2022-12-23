@@ -77,7 +77,6 @@ namespace AutoOA.UI.Controllers
                 result = result.Where(x => x.RegionId == regionId).ToList();
             }
 
-
             if ( modelId != null)
             {
                 result = result.Where(x => x.VehicleModel.VehicleModelId == modelId).ToList();

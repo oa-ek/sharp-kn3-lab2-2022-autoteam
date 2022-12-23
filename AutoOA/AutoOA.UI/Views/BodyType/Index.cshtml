@@ -1,0 +1,36 @@
+﻿@using AutoOA.Core
+@using AutoOA.Repository.Dto.BodyTypeDto
+
+@model IEnumerable<BodyType>
+
+@{
+    Layout = "~/Views/Shared/_NiceLayout.cshtml";
+}
+
+<div class="float-end">
+    <a href="/BodyType/create" class="btn btn-outline-primary">Додати тип кузова</a>
+</div>
+
+<h1>Список типів кузовів</h1>
+<hr />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>BodyType Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.BodyTypeName</td>
+                <td>
+                    <a href="/BodyType/edit/@u.BodyTypeId" class="btn btn-warning">Редагувати</a>
+                    <a href="/BodyType/Delete/@u.BodyTypeId" class="btn btn-danger">Видалити</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

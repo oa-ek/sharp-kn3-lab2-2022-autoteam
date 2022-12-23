@@ -1,0 +1,27 @@
+﻿@using AutoOA.Core
+@using AutoOA.Repository.Dto.BodyTypeDto
+
+@model BodyTypeReadDto
+
+@{
+    Layout = "~/Views/Shared/_NiceLayout.cshtml";
+}
+
+
+<h1>Confirm delete</h1>
+<hr />
+
+<h1>Видалити тип кузова?</h1>
+<hr />
+
+<p>@Model.BodyName</p>
+
+<hr />
+<form asp-action="ConfirmDelete" class="col-md-4">
+    @Html.AntiForgeryToken()
+    <input asp-for="BodyId" type="hidden" />
+    <button type="submit" class="btn btn-danger">Видалити тип кузова!!!</button>
+    <a href="/BodyType/index" class="btn btn-outline-dark">Повернутися до списку / Відмінити</a>
+</form>
+
+<hr />
