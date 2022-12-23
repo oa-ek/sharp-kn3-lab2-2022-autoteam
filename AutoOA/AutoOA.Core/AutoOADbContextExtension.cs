@@ -301,6 +301,96 @@ namespace AutoOA.Core
                     VehicleModelId = 2,
                     VehicleModelName = "320",
                     VehicleBrandId = 2,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 3,
+                    VehicleModelName = "190",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 4,
+                    VehicleModelName = "230 Pullman",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 5,
+                    VehicleModelName = "A-Class",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 6,
+                    VehicleModelName = "AMG GT",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 7,
+                    VehicleModelName = "AMG GT 4-Door Coupe",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 8,
+                    VehicleModelName = "B-Class",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 9,
+                    VehicleModelName = "C-Class",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 10,
+                    VehicleModelName = "C-Class All-Terrain",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 11,
+                    VehicleModelName = "Citan",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 12,
+                    VehicleModelName = "CL-Class",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 13,
+                    VehicleModelName = "CLA-Class",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 14,
+                    VehicleModelName = "CLC-Class",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 15,
+                    VehicleModelName = "CLK-Class",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 16,
+                    VehicleModelName = "CLS-Class",
+                    VehicleBrandId = 1,
+                },
+                new VehicleModel
+                {
+                    VehicleModelId = 17,
+                    VehicleModelName = "G-Class",
+                    VehicleBrandId = 1,
                 });
             builder.Entity<SalesData>().HasData(
                 new SalesData
@@ -319,7 +409,27 @@ namespace AutoOA.Core
                 new Region
                 {
                     RegionId = 1,
-                    RegionName = "Ukraine"
+                    RegionName = "Україна"
+                },
+                new Region
+                {
+                    RegionId = 2,
+                    RegionName = "США"
+                },
+                new Region
+                {
+                    RegionId = 3,
+                    RegionName = "Китай"
+                },
+                new Region
+                {
+                    RegionId = 4,
+                    RegionName = "Великобританія"
+                },
+                new Region
+                {
+                    RegionId = 5,
+                    RegionName = "Корея"
                 });
             builder.Entity<VehicleColor>().HasData(
                 new VehicleColor
